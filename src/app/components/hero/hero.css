@@ -1,0 +1,112 @@
+/* Ocean wave layers drift left, each tile is exactly one wave period wide
+   so a -50% shift of the 200%-wide element loops seamlessly. */
+@keyframes wave-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-wave-1 {
+  animation: wave-drift 45s linear infinite;
+}
+
+.animate-wave-2 {
+  animation: wave-drift 28s linear infinite;
+}
+
+.animate-wave-3 {
+  animation: wave-drift 16s linear infinite;
+}
+
+/* Sun by day: glowing core with a warm corona. */
+.celestial-body {
+  background: radial-gradient(circle at 35% 32%, #fffdf0 0%, #fde68a 38%, #fbbf24 70%, #f59e0b 100%);
+  box-shadow:
+    0 0 25px 8px rgba(253, 224, 71, 0.55),
+    0 0 70px 26px rgba(251, 191, 36, 0.35),
+    0 0 130px 50px rgba(252, 211, 77, 0.18);
+}
+
+/* Moon by night: pale sphere with soft crater shading. */
+.dark .celestial-body {
+  background:
+    radial-gradient(circle at 70% 65%, rgba(100, 116, 139, 0.45) 0%, transparent 18%),
+    radial-gradient(circle at 35% 70%, rgba(100, 116, 139, 0.35) 0%, transparent 14%),
+    radial-gradient(circle at 60% 28%, rgba(100, 116, 139, 0.3) 0%, transparent 12%),
+    radial-gradient(circle at 32% 35%, #ffffff 0%, #e2e8f0 45%, #cbd5e1 80%, #94a3b8 100%);
+  box-shadow:
+    0 0 25px 8px rgba(226, 232, 240, 0.3),
+    0 0 70px 24px rgba(203, 213, 225, 0.15);
+}
+
+/* Stars twinkle at staggered rates set per-star via inline animation-delay/duration. */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.animate-twinkle {
+  animation-name: twinkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* Ships drift across the horizon in opposite directions, looping off-screen. */
+@keyframes sail-right {
+  from {
+    transform: translateX(-20vw);
+  }
+  to {
+    transform: translateX(120vw);
+  }
+}
+
+@keyframes sail-left {
+  from {
+    transform: translateX(120vw);
+  }
+  to {
+    transform: translateX(-20vw);
+  }
+}
+
+.animate-sail-1 {
+  animation: sail-right 75s linear infinite;
+}
+
+.animate-sail-2 {
+  animation: sail-left 50s linear infinite;
+}
+
+/* Wanted poster flutters gently as if caught in a sea breeze. */
+@keyframes paper-flutter {
+  0%,
+  100% {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-4deg) rotate(-1deg);
+  }
+  25% {
+    transform: perspective(1000px) rotateX(-3deg) rotateY(2deg) rotate(0.5deg);
+  }
+  50% {
+    transform: perspective(1000px) rotateX(1deg) rotateY(-2deg) rotate(-0.5deg);
+  }
+  75% {
+    transform: perspective(1000px) rotateX(-2deg) rotateY(4deg) rotate(1deg);
+  }
+}
+
+.animate-paper-flutter {
+  animation: paper-flutter 7s ease-in-out infinite;
+  transform-style: preserve-3d;
+  will-change: transform;
+}

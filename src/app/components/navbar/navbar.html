@@ -1,0 +1,80 @@
+<header class="fixed top-0 inset-x-0 z-50 border-b border-amber-900/10 bg-white/70 backdrop-blur-md transition-colors dark:border-amber-400/10 dark:bg-slate-950/60">
+  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 sm:px-8">
+    <a href="#home" (click)="closeMenu()" class="flex items-center gap-2.5">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="h-8 w-8 flex-shrink-0 drop-shadow-sm">
+        <ellipse cx="16" cy="21" rx="14" ry="5" fill="#eccb83"/>
+        <path d="M6 19 C6 10 12 6 16 6 C20 6 26 10 26 19 Z" fill="#f6e2b3"/>
+        <path d="M6 18.5 C6 18.5 11 22 16 22 C21 22 26 18.5 26 18.5 L26 15.5 C26 15.5 21 19 16 19 C11 19 6 15.5 6 15.5 Z" fill="#d6362f"/>
+      </svg>
+      <span class="font-pirate text-xl tracking-wide text-slate-800 dark:text-slate-100">
+        Dominic<span class="text-gradient">.dev</span>
+      </span>
+    </a>
+
+    <div class="hidden items-center gap-8 md:flex">
+      @for (link of links; track link.href) {
+        <a
+          [href]="link.href"
+          class="text-sm font-medium text-slate-600 transition-colors hover:text-amber-600 dark:text-slate-300 dark:hover:text-amber-400"
+        >
+          {{ link.label }}
+        </a>
+      }
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        (click)="toggleTheme()"
+        aria-label="Toggle dark mode"
+        class="grid h-10 w-10 place-items-center rounded-full border border-amber-900/15 text-slate-600 transition-colors hover:border-amber-500 hover:text-amber-600 dark:border-amber-400/15 dark:text-slate-300 dark:hover:border-amber-400 dark:hover:text-amber-400"
+      >
+        @if (theme.theme() === 'dark') {
+          <!-- sun icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+          </svg>
+        } @else {
+          <!-- moon icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        }
+      </button>
+
+      <button
+        type="button"
+        (click)="toggleMenu()"
+        aria-label="Toggle menu"
+        class="grid h-10 w-10 place-items-center rounded-full border border-amber-900/15 text-slate-600 transition-colors md:hidden dark:border-amber-400/15 dark:text-slate-300"
+      >
+        @if (menuOpen()) {
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+            <path d="M18 6 6 18M6 6l12 12"/>
+          </svg>
+        } @else {
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+            <path d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        }
+      </button>
+    </div>
+  </nav>
+
+  @if (menuOpen()) {
+    <div class="border-t border-amber-900/10 bg-white/95 px-6 py-4 backdrop-blur-md md:hidden dark:border-amber-400/10 dark:bg-slate-950/95">
+      <div class="flex flex-col gap-4">
+        @for (link of links; track link.href) {
+          <a
+            [href]="link.href"
+            (click)="closeMenu()"
+            class="text-sm font-medium text-slate-600 transition-colors hover:text-amber-600 dark:text-slate-300 dark:hover:text-amber-400"
+          >
+            {{ link.label }}
+          </a>
+        }
+      </div>
+    </div>
+  }
+</header>

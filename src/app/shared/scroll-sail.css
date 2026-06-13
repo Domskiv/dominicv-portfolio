@@ -1,0 +1,17 @@
+/* The ship marker centers on its `top` position and gently rocks as if
+   riding the waves while it sails down the route. */
+@keyframes ship-bob {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(-6deg) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(6deg) translateY(-3px);
+  }
+}
+
+.animate-ship-bob {
+  transition: top 120ms linear;
+  animation: ship-bob 2.6s ease-in-out infinite;
+  transform-origin: center;
+}

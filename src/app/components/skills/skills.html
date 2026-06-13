@@ -1,0 +1,33 @@
+<section id="skills" class="relative py-20 sm:py-28">
+  <div class="mx-auto max-w-6xl px-6 sm:px-8">
+    <div appReveal class="mx-auto max-w-2xl text-center">
+      <p class="font-pirate text-base text-amber-600 dark:text-amber-400">Devil Fruit Powers</p>
+      <h2 class="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">Abilities I've awakened across the Grand Line</h2>
+      <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Every great pirate has a power. Here's my arsenal, charted across the crew's stations.</p>
+    </div>
+
+    <div class="mt-16 divide-y divide-slate-200 dark:divide-slate-800">
+      @for (category of categories; track category.title; let i = $index) {
+        <div
+          appReveal
+          [appRevealDelay]="(i % 3) * 100"
+          class="grid grid-cols-1 gap-4 py-8 first:pt-0 last:pb-0 sm:grid-cols-[200px_1fr] sm:gap-10"
+        >
+          <div>
+            <h3 class="font-display text-2xl font-black uppercase tracking-tight text-slate-900 sm:text-3xl dark:text-white">{{ category.title }}</h3>
+            <p class="mt-1 text-xs italic text-amber-600/80 dark:text-amber-400/70">{{ category.fruit }}</p>
+          </div>
+
+          <div class="flex flex-wrap content-start gap-x-8 gap-y-5">
+            @for (skill of category.skills; track skill) {
+              <div class="group flex items-center gap-3">
+                <app-tech-icon [name]="skill" size="sm" />
+                <span class="text-sm font-medium text-slate-700 dark:text-slate-200">{{ skill }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

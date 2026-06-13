@@ -1,0 +1,35 @@
+<div class="pointer-events-none fixed right-5 top-1/2 z-40 hidden h-[55vh] -translate-y-1/2 lg:block">
+  <div class="relative h-full">
+    <!-- dotted route -->
+    <div class="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 border-l-2 border-dashed border-amber-400/40 dark:border-amber-300/25"></div>
+
+    <!-- islands along the route -->
+    @for (island of islands; track island.id; let i = $index) {
+      <a
+        [href]="'#' + island.id"
+        class="group pointer-events-auto absolute left-1/2 -translate-x-1/2 -translate-y-1/2"
+        [style.top.%]="islandPositions()[i] * 100"
+      >
+        <span
+          class="grid h-6 w-6 place-items-center rounded-full bg-white/80 text-sm shadow ring-1 ring-amber-300/50 transition-transform duration-300 group-hover:scale-125 dark:bg-slate-900/80 dark:ring-amber-400/30"
+        >
+          {{ island.emoji }}
+        </span>
+        <span
+          class="pointer-events-none absolute right-full top-1/2 mr-2 -translate-y-1/2 whitespace-nowrap rounded-md bg-slate-900/90 px-2 py-1 text-xs font-medium text-white opacity-0 shadow-lg transition-opacity duration-300 group-hover:opacity-100 dark:bg-slate-100/90 dark:text-slate-900"
+        >
+          {{ island.label }}
+        </span>
+      </a>
+    }
+
+    <!-- the ship, sailing along the route as you scroll -->
+    <div class="animate-ship-bob absolute left-1/2 top-0" [style.top.%]="progress() * 100">
+      <svg viewBox="0 0 24 24" class="h-6 w-7 drop-shadow-md">
+        <path d="M3 16 21 16 18 21 6 21Z" fill="#5b3a1e" />
+        <rect x="11.4" y="4" width="1.2" height="12" rx="0.4" fill="#5b3a1e" />
+        <path d="M12.6 5 19 14 12.6 14Z" fill="#f5ead2" />
+      </svg>
+    </div>
+  </div>
+</div>

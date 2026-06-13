@@ -1,0 +1,31 @@
+/* Flutter the flag's outer edge between two wind-blown shapes */
+@keyframes flag-edge-wave {
+  0%,
+  100% {
+    d: path('M7,8 L74,7 Q88,16 74,25 Q60,34 76,43 Q90,50 74,49 L7,49 Z');
+  }
+  50% {
+    d: path('M7,8 L70,5 Q90,14 72,26 Q56,36 78,44 Q92,52 70,49 L7,49 Z');
+  }
+}
+
+.flag-edge {
+  animation: flag-edge-wave 2.4s ease-in-out infinite;
+}
+
+/* Gentle overall sway, pivoting from the pole */
+@keyframes flag-sway {
+  0%,
+  100% {
+    transform: scaleX(1) skewY(0deg);
+  }
+  50% {
+    transform: scaleX(0.97) skewY(-1.4deg);
+  }
+}
+
+.flag-group {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: flag-sway 3.2s ease-in-out infinite;
+}

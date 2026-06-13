@@ -1,29 +1,29 @@
 <section id="contact" class="relative py-20 sm:py-28">
   <div class="mx-auto max-w-5xl px-6 sm:px-8">
-    <div appReveal class="group relative h-[30rem] overflow-hidden rounded-3xl shadow-2xl shadow-blue-900/30 sm:h-[34rem] lg:h-[38rem]">
+    <div appReveal class="relative h-[30rem] overflow-hidden rounded-3xl shadow-2xl shadow-blue-900/30 sm:h-[34rem] lg:h-[38rem]">
       <img
         src="images/crew.png"
         alt="Cartoon illustration of Dominic sailing with his crew"
-        class="absolute inset-0 h-full w-full object-cover object-[center_35%]"
+        class="peer absolute inset-0 h-full w-full object-cover object-[center_35%]"
       />
 
       <!-- Hover hint, sitting in the gap between the two panels until the crew is revealed -->
-      <div class="pointer-events-none absolute inset-0 z-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
+      <div class="pointer-events-none absolute inset-0 z-0 flex items-center justify-center transition-opacity duration-300 peer-hover:opacity-0">
         <span class="rounded-full bg-slate-900/60 px-4 py-2 text-xs font-medium text-white backdrop-blur-sm sm:text-sm">
           ⚓ Hover to meet the crew
         </span>
       </div>
 
-      <!-- Top panel: title, slides up and away on hover -->
-      <div class="absolute inset-x-0 top-0 z-10 border-b-2 border-amber-500/20 bg-white/95 px-6 py-5 transition-transform duration-700 ease-out group-hover:-translate-y-full sm:px-8 sm:py-6 dark:border-amber-400/15 dark:bg-slate-900/95">
+      <!-- Top panel: title, slides up and away when hovering the image -->
+      <div class="absolute inset-x-0 top-0 z-10 border-b-2 border-amber-500/20 bg-white/95 px-6 py-5 transition-transform duration-700 ease-out peer-hover:-translate-y-full sm:px-8 sm:py-6 dark:border-amber-400/15 dark:bg-slate-900/95">
         <p class="font-pirate text-base text-red-600 dark:text-red-400">Join the Crew</p>
         <h2 class="mt-1 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-amber-50">
           Let's be nakamas!
         </h2>
       </div>
 
-      <!-- Bottom panel: details and links, slides down and away on hover -->
-      <div class="absolute inset-x-0 bottom-0 z-10 border-t-2 border-amber-500/20 bg-white/95 px-6 py-5 transition-transform duration-700 ease-out group-hover:translate-y-full sm:px-8 sm:py-6 dark:border-amber-400/15 dark:bg-slate-900/95">
+      <!-- Bottom panel: details and links, slides down and away when hovering the image -->
+      <div class="absolute inset-x-0 bottom-0 z-10 border-t-2 border-amber-500/20 bg-white/95 px-6 py-5 transition-transform duration-700 ease-out peer-hover:translate-y-full sm:px-8 sm:py-6 dark:border-amber-400/15 dark:bg-slate-900/95">
         <p class="text-sm leading-relaxed text-slate-700 sm:text-base dark:text-slate-300">
           I'm open to new opportunities and collaborations. Whether you've got a job offer, a quest, or just
           want to talk about Devil Fruits — ring the Den Den Mushi, my inbox is always open. 📣

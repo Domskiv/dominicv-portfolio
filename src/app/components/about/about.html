@@ -2,7 +2,7 @@
   <div class="mx-auto max-w-6xl px-6 sm:px-8">
     <div appReveal class="mx-auto max-w-2xl text-center">
       <p class="font-pirate text-base text-amber-600 dark:text-amber-400">Wanted</p>
-      <h2 class="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+      <h2 class="mt-3 font-display text-2xl font-bold tracking-tight sm:text-4xl">
         Full-stack engineer, framework modernizer, AI-augmented builder
       </h2>
     </div>
@@ -32,16 +32,16 @@
       </div>
 
       <div appReveal [appRevealDelay]="150" class="relative">
-        <div class="wanted-frame bg-parchment relative rounded-2xl p-6 shadow-lg sm:p-8">
+        <div class="wanted-frame bg-parchment relative rounded-2xl p-5 shadow-lg sm:p-8">
           <div class="mb-5 text-center">
             <p class="font-pirate text-3xl tracking-widest text-red-600 dark:text-red-400">WANTED</p>
             <p class="mt-1 text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">Dead or Alive · Bounty Record</p>
           </div>
 
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-2 gap-3 sm:gap-4">
             @for (stat of stats; track stat.label) {
-              <div class="rounded-2xl border border-amber-600/20 bg-white/60 p-6 text-center shadow-sm backdrop-blur transition-transform hover:-translate-y-1 dark:border-amber-400/15 dark:bg-slate-900/40">
-                <p class="text-gradient font-display text-3xl font-bold sm:text-4xl">{{ stat.value }}</p>
+              <div class="rounded-2xl border border-amber-600/20 bg-white/60 p-4 text-center shadow-sm backdrop-blur transition-transform hover:-translate-y-1 sm:p-6 dark:border-amber-400/15 dark:bg-slate-900/40">
+                <p class="text-gradient font-display text-2xl font-bold sm:text-4xl">{{ stat.value }}</p>
                 <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">{{ stat.label }}</p>
               </div>
             }

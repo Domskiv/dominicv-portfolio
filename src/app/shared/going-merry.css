@@ -1,0 +1,56 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Gentle rocking as the Going Merry sails along the route. */
+@keyframes going-merry-bob {
+  0%,
+  100% {
+    transform: rotate(-4deg) translateY(0);
+  }
+  50% {
+    transform: rotate(4deg) translateY(-2px);
+  }
+}
+
+.going-merry-ship {
+  transform-box: fill-box;
+  transform-origin: 50% 80%;
+  animation: going-merry-bob 2.6s ease-in-out infinite;
+}
+
+/* Expanding, fading wake ripples beneath the hull. */
+@keyframes going-merry-wake {
+  0% {
+    transform: translateX(-50%) scaleX(0.5);
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateX(-50%) scaleX(1.6);
+    opacity: 0;
+  }
+}
+
+.going-merry-wake {
+  position: absolute;
+  left: 50%;
+  bottom: 6%;
+  width: 70%;
+  height: 8%;
+  border-radius: 999px;
+  background: rgba(125, 184, 255, 0.55);
+  animation: going-merry-wake 2.2s ease-out infinite;
+}
+
+.going-merry-wake-2 {
+  animation-delay: 1.1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .going-merry-ship,
+  .going-merry-wake {
+    animation: none;
+  }
+}

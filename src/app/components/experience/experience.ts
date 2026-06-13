@@ -1,5 +1,16 @@
-import { Component } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DestroyRef,
+  ElementRef,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+  inject,
+  signal,
+} from '@angular/core';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { GoingMerry } from '../../shared/going-merry';
 
 interface ExperienceItem {
   role: string;
@@ -10,11 +21,11 @@ interface ExperienceItem {
 
 @Component({
   selector: 'app-experience',
-  imports: [RevealDirective],
+  imports: [RevealDirective, GoingMerry],
   templateUrl: './experience.html',
   styleUrl: './experience.css',
 })
-export class Experience {
+export class Experience implements AfterViewInit {
   protected readonly experience: ExperienceItem[] = [
     {
       role: 'Associate Software Engineer I',
@@ -32,6 +43,18 @@ export class Experience {
       ],
     },
     {
+      role: 'Freelance Web Developer',
+      company: 'Freelance · Remote',
+      period: '2024 – Present',
+      highlights: [
+        'Designed and built custom WordPress websites and themes for small business clients, focused on responsive, accessible layouts.',
+        'Developed custom Gutenberg blocks and block patterns to give clients flexible, on-brand page-building tools within the WordPress editor.',
+        'Extended themes and plugins via hooks, filters, and custom PHP to meet client-specific functionality and design requirements.',
+        'Managed end-to-end client engagements, from requirements gathering through deployment and ongoing maintenance.',
+        'Optimized site performance and on-page SEO basics, including caching, image optimization, and metadata.',
+      ],
+    },
+    {
       role: 'Associate Software Engineer — Trainee',
       company: 'Cloudstaff · Remote',
       period: 'Feb 2023 – May 2023',
@@ -44,4 +67,86 @@ export class Experience {
       ],
     },
   ];
+
+  @ViewChild('track') protected trackRef?: ElementRef<HTMLElement>;
+  @ViewChildren('islandMarker') protected markerRefs?: QueryList<ElementRef<HTMLElement>>;
+
+  /** 0..1 position of the Going Merry along the voyage track. */
+  protected readonly shipProgress = signal(0);
+
+  /** One entry per island marker (including the final one), true once the ship has reached it. */
+  protected readonly arrived = signal<boolean[]>(Array(this.experience.length + 1).fill(false));
+
+  private markerOffsets: number[] = [];
+  private trackTop = 0;
+  private trackHeight = 0;
+  private ticking = false;
+
+  constructor() {
+    const destroyRef = inject(DestroyRef);
+    const onScroll = () => this.requestUpdate();
+    const onResize = () => {
+      this.measure();
+      this.requestUpdate();
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize);
+
+    destroyRef.onDestroy(() => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.measure();
+    this.requestUpdate();
+  }
+
+  private measure(): void {
+    const track = this.trackRef?.nativeElement;
+    if (!track || !this.markerRefs) {
+      return;
+    }
+
+    const trackRect = track.getBoundingClientRect();
+    this.trackTop = trackRect.top + window.scrollY;
+    this.trackHeight = trackRect.height;
+
+    this.markerOffsets = this.markerRefs.map((ref) => {
+      if (this.trackHeight <= 0) {
+        return 0;
+      }
+      const top = ref.nativeElement.getBoundingClientRect().top + window.scrollY;
+      return Math.min(1, Math.max(0, (top - this.trackTop) / this.trackHeight));
+    });
+  }
+
+  private requestUpdate(): void {
+    if (this.ticking || this.trackHeight <= 0) {
+      return;
+    }
+    this.ticking = true;
+    requestAnimationFrame(() => {
+      const raw = (window.scrollY + window.innerHeight * 0.5 - this.trackTop) / this.trackHeight;
+      const progress = Math.min(1, Math.max(0, raw));
+      this.shipProgress.set(progress);
+
+      const current = this.arrived();
+      const next = [...current];
+      let changed = false;
+      this.markerOffsets.forEach((offset, i) => {
+        if (!next[i] && progress >= offset - 0.02) {
+          next[i] = true;
+          changed = true;
+        }
+      });
+      if (changed) {
+        this.arrived.set(next);
+      }
+
+      this.ticking = false;
+    });
+  }
 }

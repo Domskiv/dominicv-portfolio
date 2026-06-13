@@ -13,10 +13,18 @@
       </div>
     </div>
 
-    <div class="mt-16 space-y-10 border-l-2 border-dashed border-amber-300 pl-8 dark:border-amber-700/50 sm:pl-10">
+    <div #track class="relative mt-16 space-y-10 border-l-2 border-dashed border-amber-300 pl-8 dark:border-amber-700/50 sm:pl-10">
+      <!-- Going Merry, sailing down the voyage track as the page scrolls -->
+      <div
+        class="pointer-events-none absolute left-[-2.875rem] z-10 h-10 w-10 -translate-x-1/2 -translate-y-1/2 transition-[top] duration-300 ease-out sm:left-[-3.375rem] sm:h-12 sm:w-12"
+        [style.top.%]="shipProgress() * 100"
+      >
+        <app-going-merry />
+      </div>
+
       @for (job of experience; track job.role; let i = $index) {
         <div appReveal [appRevealDelay]="i * 120" class="relative">
-          <span class="absolute top-2 left-[-2.875rem] grid h-7 w-7 place-items-center rounded-full bg-gradient-to-br from-amber-400 to-red-500 text-xs ring-4 ring-slate-50 sm:left-[-3.375rem] dark:ring-slate-900">
+          <span #islandMarker class="island-marker absolute top-2 left-[-2.875rem] grid h-7 w-7 place-items-center rounded-full bg-gradient-to-br from-amber-400 to-red-500 text-xs ring-4 ring-slate-50 sm:left-[-3.375rem] dark:ring-slate-900" [class.arrived]="arrived()[i]">
             🏝️
           </span>
 
@@ -40,7 +48,7 @@
       }
 
       <div appReveal [appRevealDelay]="experience.length * 120" class="relative">
-        <span class="absolute top-2 left-[-2.875rem] grid h-7 w-7 place-items-center rounded-full border-2 border-dashed border-amber-400 text-xs sm:left-[-3.375rem]">
+        <span #islandMarker class="island-marker absolute top-2 left-[-2.875rem] grid h-7 w-7 place-items-center rounded-full border-2 border-dashed border-amber-400 text-xs sm:left-[-3.375rem]" [class.arrived]="arrived()[experience.length]">
           🏴‍☠️
         </span>
         <p class="text-sm italic text-slate-400 dark:text-slate-500">The adventure continues — next island, here I come.</p>

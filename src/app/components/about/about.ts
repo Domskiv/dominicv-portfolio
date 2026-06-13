@@ -14,9 +14,9 @@ interface Stat {
 })
 export class About {
   protected readonly stats: Stat[] = [
-    { value: '1+', label: 'Year of professional experience' },
-    { value: '2', label: 'Production apps modernized' },
-    { value: '10K+', label: 'Users on an upgraded legacy system' },
+    { value: '2+', label: 'Years of professional experience' },
+    { value: '2', label: 'Production apps shipped features to' },
+    { value: '6', label: 'Core tech stack areas' },
     { value: '1', label: 'Squad of the Year award' },
   ];
 

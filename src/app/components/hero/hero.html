@@ -39,6 +39,37 @@
         <rect class="fill-slate-700/70 dark:fill-slate-200/50" x="48.5" y="6" width="2" height="42" />
         <path class="fill-slate-700/60 dark:fill-slate-300/40" d="M51,10 L82,40 L51,42 Z" />
         <path class="fill-slate-700/60 dark:fill-slate-300/40" d="M48,18 L24,38 L48,40 Z" />
+
+        <!-- Jolly Roger: skull, crossbones, and straw hat -->
+        <g class="opacity-90" transform="translate(61,28) scale(0.55) translate(-36,-26.2)">
+          <g fill="#f5ead2">
+            <g transform="rotate(-25 36 40)">
+              <rect x="20" y="38.5" width="32" height="3" rx="1.5" />
+              <circle cx="20" cy="40" r="2.6" />
+              <circle cx="52" cy="40" r="2.6" />
+            </g>
+            <g transform="rotate(25 36 40)">
+              <rect x="20" y="38.5" width="32" height="3" rx="1.5" />
+              <circle cx="20" cy="40" r="2.6" />
+              <circle cx="52" cy="40" r="2.6" />
+            </g>
+          </g>
+
+          <ellipse cx="36" cy="23" rx="11" ry="9" fill="#f5ead2" />
+          <rect x="28" y="28" width="16" height="6" rx="2" fill="#f5ead2" />
+          <g fill="#16161a">
+            <ellipse cx="31.5" cy="22" rx="2.6" ry="3.4" />
+            <ellipse cx="40.5" cy="22" rx="2.6" ry="3.4" />
+            <path d="M36,24.5 L34.2,28 L37.8,28 Z" />
+            <rect x="31" y="28" width="1.4" height="6" />
+            <rect x="35.3" y="28" width="1.4" height="6" />
+            <rect x="39.6" y="28" width="1.4" height="6" />
+          </g>
+
+          <ellipse cx="36" cy="13" rx="15" ry="3.4" fill="#e8b75c" stroke="#b9874a" stroke-width="0.6" />
+          <ellipse cx="36" cy="11" rx="8.5" ry="4.6" fill="#f3deac" stroke="#b9874a" stroke-width="0.6" />
+          <rect x="27.5" y="15" width="17" height="2.6" fill="#a8231f" />
+        </g>
       </svg>
     </div>
 
@@ -56,6 +87,37 @@
         <rect class="fill-slate-800/80 dark:fill-slate-100/60" x="47" y="4" width="2.4" height="44" />
         <path class="fill-slate-800/70 dark:fill-slate-200/50" d="M50,8 L86,38 L50,41 Z" />
         <path class="fill-slate-800/70 dark:fill-slate-200/50" d="M47,16 L18,40 L47,43 Z" />
+
+        <!-- Jolly Roger: skull, crossbones, and bandana -->
+        <g class="opacity-90" transform="translate(63,27) scale(0.6) translate(-36,-26)">
+          <g fill="#f5ead2">
+            <g transform="rotate(-25 36 40)">
+              <rect x="20" y="38.5" width="32" height="3" rx="1.5" />
+              <circle cx="20" cy="40" r="2.6" />
+              <circle cx="52" cy="40" r="2.6" />
+            </g>
+            <g transform="rotate(25 36 40)">
+              <rect x="20" y="38.5" width="32" height="3" rx="1.5" />
+              <circle cx="20" cy="40" r="2.6" />
+              <circle cx="52" cy="40" r="2.6" />
+            </g>
+          </g>
+
+          <ellipse cx="36" cy="23" rx="11" ry="9" fill="#f5ead2" />
+          <rect x="28" y="28" width="16" height="6" rx="2" fill="#f5ead2" />
+          <g fill="#16161a">
+            <ellipse cx="31.5" cy="22" rx="2.6" ry="3.4" />
+            <ellipse cx="40.5" cy="22" rx="2.6" ry="3.4" />
+            <path d="M36,24.5 L34.2,28 L37.8,28 Z" />
+            <rect x="31" y="28" width="1.4" height="6" />
+            <rect x="35.3" y="28" width="1.4" height="6" />
+            <rect x="39.6" y="28" width="1.4" height="6" />
+          </g>
+
+          <!-- bandana -->
+          <path d="M21,14 Q36,5.5 51,14 L51,17.5 Q36,12 21,17.5 Z" fill="#dc2626" />
+          <path d="M48,15.5 L55,19.5 L49.5,21 Z" fill="#dc2626" />
+        </g>
       </svg>
     </div>
 
@@ -74,14 +136,16 @@
 
   <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-6 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
     <!-- Left: intro -->
-    <div appReveal>
-      <div class="flex items-center gap-3 sm:gap-4">
-        <span class="inline-flex items-center gap-2 rounded-full border border-amber-900/15 bg-white/60 px-3.5 py-1.5 text-xs font-medium text-slate-600 backdrop-blur sm:px-4 sm:text-sm dark:border-amber-400/15 dark:bg-slate-900/60 dark:text-slate-300">
-          <span class="h-2 w-2 flex-shrink-0 rounded-full bg-emerald-400 animate-pulse"></span>
-          Open to new opportunities — ready to set sail
-        </span>
-        <app-pirate-flag class="h-10 w-14 flex-shrink-0 sm:h-14 sm:w-20" />
+    <div appReveal class="relative">
+      <!-- big Jolly Roger flag, waving in the wind behind the intro text -->
+      <div class="pointer-events-none absolute -top-4 -left-56 -z-10 h-28 w-40 -rotate-[8deg] scale-x-[-1] sm:top-4 sm:-left-80 sm:h-60 sm:w-[22rem] sm:-rotate-[18deg]" aria-hidden="true">
+        <app-pirate-flag class="h-full w-full" />
       </div>
+
+      <span class="inline-flex items-center gap-2 rounded-full border border-amber-900/15 bg-white/60 px-3.5 py-1.5 text-xs font-medium text-slate-600 backdrop-blur sm:px-4 sm:text-sm dark:border-amber-400/15 dark:bg-slate-900/60 dark:text-slate-300">
+        <span class="h-2 w-2 flex-shrink-0 rounded-full bg-emerald-400 animate-pulse"></span>
+        Open to new opportunities — ready to set sail
+      </span>
 
       <h1 class="mt-6 font-display text-3xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
         Ahoy, I'm <span class="text-gradient">Dominic Alwin Velasquez</span>
@@ -97,18 +161,18 @@
 
       <p class="mt-6 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-400">
         Building responsive, component-driven Angular UIs and the Laravel/Lumen + PostgreSQL APIs that power
-        them — with a track record of framework modernization, AI-augmented workflows, and full-cycle feature
-        delivery as I chart a course across the Grand Line of full-stack development.
+        them — with a track record of full-cycle feature delivery, AI-augmented workflows, and framework
+        modernization as I chart a course across the Grand Line of full-stack development.
       </p>
 
       <div class="mt-5 flex flex-wrap items-center gap-3">
         <div class="inline-flex items-center gap-2 rounded-full border border-amber-900/10 bg-white/70 px-4 py-2 text-sm font-medium text-slate-600 shadow-sm backdrop-blur dark:border-amber-400/10 dark:bg-slate-900/60 dark:text-slate-300">
           <span>🏆</span>
-          <span><span class="font-semibold text-slate-800 dark:text-slate-100">Squad of the Year</span> — Cloudstaff recognition</span>
+          <span>Part of the <span class="font-semibold text-slate-800 dark:text-slate-100">Squad of the Year 2025</span> — company recognition</span>
         </div>
         <div class="inline-flex items-center gap-2 rounded-full border border-amber-900/10 bg-white/70 px-4 py-2 text-sm font-medium text-slate-600 shadow-sm backdrop-blur dark:border-amber-400/10 dark:bg-slate-900/60 dark:text-slate-300">
           <span>⭐</span>
-          <span><span class="font-semibold text-slate-800 dark:text-slate-100">Multiple-time Rockstar of the Month</span> — Cloudstaff recognition</span>
+          <span><span class="font-semibold text-slate-800 dark:text-slate-100">Multiple-time Rockstar of the Month</span> — company recognition</span>
         </div>
       </div>
 

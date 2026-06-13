@@ -1,0 +1,89 @@
+<div
+  class="welcome-overlay fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-slate-950"
+  [class.closing]="closing()"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Welcome"
+>
+  <!-- treasure map background, slowly panning/zooming -->
+  <div class="welcome-bg absolute inset-0">
+    <img src="images/world-of-one-piece.jpg" alt="" class="h-full w-full object-cover" aria-hidden="true" />
+  </div>
+
+  <!-- readability + mood overlays -->
+  <div class="absolute inset-0 bg-gradient-to-b from-slate-950/75 via-slate-950/45 to-slate-950/85"></div>
+  <div class="absolute inset-0 bg-gradient-to-tr from-amber-900/25 via-transparent to-blue-950/40"></div>
+  <div class="welcome-vignette absolute inset-0"></div>
+
+  <!-- twinkling treasure sparkles -->
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <span class="welcome-sparkle absolute left-[12%] top-[22%] h-1 w-1 rounded-full bg-amber-200 shadow-[0_0_6px_2px_rgba(252,211,77,0.8)]" style="animation-duration: 3.2s; animation-delay: -0.4s;"></span>
+    <span class="welcome-sparkle absolute left-[24%] top-[68%] h-1.5 w-1.5 rounded-full bg-amber-100 shadow-[0_0_8px_2px_rgba(253,230,138,0.85)]" style="animation-duration: 4.1s; animation-delay: -1.8s;"></span>
+    <span class="welcome-sparkle absolute left-[18%] top-[8%] h-1 w-1 rounded-full bg-amber-200 shadow-[0_0_6px_2px_rgba(252,211,77,0.8)]" style="animation-duration: 3.6s; animation-delay: -2.4s;"></span>
+    <span class="welcome-sparkle absolute left-[68%] top-[35%] h-2 w-2 rounded-full bg-amber-100 shadow-[0_0_10px_3px_rgba(253,230,138,0.9)]" style="animation-duration: 4.6s; animation-delay: -0.9s;"></span>
+    <span class="welcome-sparkle absolute left-[80%] top-[70%] h-1 w-1 rounded-full bg-amber-200 shadow-[0_0_6px_2px_rgba(252,211,77,0.8)]" style="animation-duration: 3.4s; animation-delay: -3.1s;"></span>
+    <span class="welcome-sparkle absolute left-[88%] top-[22%] h-1.5 w-1.5 rounded-full bg-amber-100 shadow-[0_0_8px_2px_rgba(253,230,138,0.85)]" style="animation-duration: 3.9s; animation-delay: -1.2s;"></span>
+    <span class="welcome-sparkle absolute left-[84%] top-[90%] h-1 w-1 rounded-full bg-amber-200 shadow-[0_0_6px_2px_rgba(252,211,77,0.8)]" style="animation-duration: 4.3s; animation-delay: -2s;"></span>
+    <span class="welcome-sparkle absolute left-[6%] top-[50%] h-1 w-1 rounded-full bg-amber-100 shadow-[0_0_6px_2px_rgba(253,230,138,0.8)]" style="animation-duration: 3.1s; animation-delay: -1.5s;"></span>
+  </div>
+
+  <!-- charted route across the Grand Line, drawing and tracing toward the treasure -->
+  <svg class="welcome-route pointer-events-none absolute inset-0 hidden h-full w-full lg:block" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <path class="welcome-route-path" d="M8,86 C26,62 22,40 38,34 S60,46 58,28 S82,18 92,9" fill="none" stroke="#fde68a" stroke-width="0.35" stroke-linecap="round" stroke-dasharray="1.2 2.4" />
+    <circle class="welcome-route-x" cx="8" cy="86" r="0.9" fill="#fcd34d" />
+    <g class="welcome-route-x" transform="translate(92,9)">
+      <path d="M-1.6,-1.6 L1.6,1.6 M1.6,-1.6 L-1.6,1.6" stroke="#fcd34d" stroke-width="0.5" stroke-linecap="round" />
+    </g>
+  </svg>
+
+  <!-- spinning compass rose, desktop flourish -->
+  <div class="pointer-events-none absolute right-10 top-10 hidden lg:block" aria-hidden="true">
+    <svg viewBox="0 0 100 100" class="animate-spin-slow h-24 w-24 opacity-80 drop-shadow-[0_0_10px_rgba(252,211,77,0.35)]">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#fde68a" stroke-width="1.5" opacity="0.7" />
+      <circle cx="50" cy="50" r="38" fill="none" stroke="#fde68a" stroke-width="0.75" opacity="0.5" />
+      <g fill="#fde68a">
+        <path d="M50,4 L54,18 L50,14 L46,18 Z" />
+        <path d="M50,96 L54,82 L50,86 L46,82 Z" />
+        <path d="M4,50 L18,46 L14,50 L18,54 Z" />
+        <path d="M96,50 L82,46 L86,50 L82,54 Z" />
+      </g>
+      <path d="M50,18 L58,50 L50,82 L42,50 Z" fill="#fcd34d" opacity="0.85" />
+      <path d="M50,18 L58,50 L50,50 Z" fill="#fef3c7" />
+      <circle cx="50" cy="50" r="3" fill="#fef3c7" stroke="#b45309" stroke-width="0.75" />
+    </svg>
+  </div>
+
+  <!-- content -->
+  <div class="welcome-content relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 text-center">
+    <p class="welcome-rise font-pirate text-lg text-amber-300 sm:text-xl lg:text-2xl">A new world awaits, Captain</p>
+
+    <h1 class="welcome-rise mt-3 font-display text-4xl font-bold leading-tight text-white sm:text-6xl lg:text-7xl">
+      Welcome to my journey to <span class="text-gradient">ONE PIECE</span>!
+    </h1>
+
+    <p class="welcome-rise mt-6 max-w-xl text-base leading-relaxed text-slate-200 sm:text-lg">
+      Grab your Log Pose — set sail across this portfolio to explore the islands of my experience, skills, and
+      adventures so far.
+    </p>
+
+    <div class="welcome-rise mt-10">
+      <button
+        type="button"
+        (click)="onProceed()"
+        class="welcome-proceed-btn inline-flex items-center gap-3 rounded-full border-[3px] border-amber-950 bg-gradient-to-r from-amber-400 to-red-500 px-9 py-4 text-lg font-extrabold tracking-wide text-white"
+      >
+        Proceed
+        <span class="welcome-proceed-icon inline-block text-2xl" aria-hidden="true">⛵</span>
+      </button>
+    </div>
+
+    <p class="welcome-rise mt-6 flex items-center gap-2 text-xs text-slate-300/80">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 flex-shrink-0">
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <path d="M8 21h8" />
+        <path d="M12 17v4" />
+      </svg>
+      For the full treasure-map experience, this site looks best on a desktop screen.
+    </p>
+  </div>
+</div>

@@ -1,3 +1,7 @@
+@if (showWelcome()) {
+  <app-welcome (proceed)="onProceed()" />
+}
+
 <app-navbar />
 
 <main>

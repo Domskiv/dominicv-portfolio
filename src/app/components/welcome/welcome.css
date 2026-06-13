@@ -1,0 +1,183 @@
+:host {
+  display: block;
+}
+
+.welcome-overlay {
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.welcome-overlay.closing {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Slow drift across the treasure map, as if the camera is sailing over it. */
+@keyframes welcome-ken-burns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.12) translate(-1.5%, -1%);
+  }
+  100% {
+    transform: scale(1.05) translate(1%, 1.5%);
+  }
+}
+
+.welcome-bg img {
+  animation: welcome-ken-burns 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Soft dark vignette to keep focus on the centered text. */
+.welcome-vignette {
+  background: radial-gradient(circle at center, transparent 35%, rgba(2, 6, 23, 0.55) 100%);
+}
+
+/* Treasure sparkles twinkle at staggered rates, set per-star via inline animation-delay/duration. */
+@keyframes welcome-sparkle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+.welcome-sparkle {
+  animation-name: welcome-sparkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* Charted route traces itself across the map in a continuous marching pattern. */
+@keyframes welcome-route-draw {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+.welcome-route-path {
+  animation: welcome-route-draw 12s linear infinite;
+  filter: drop-shadow(0 0 2px rgba(252, 211, 77, 0.6));
+}
+
+@keyframes welcome-route-mark {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
+.welcome-route-x {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: welcome-route-mark 2.4s ease-in-out infinite;
+}
+
+/* Heading, subtitle, and button rise into place with a gentle stagger. */
+@keyframes welcome-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.welcome-rise {
+  opacity: 0;
+  animation: welcome-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.welcome-content > :nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.welcome-content > :nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.welcome-content > :nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.welcome-content > :nth-child(4) {
+  animation-delay: 0.55s;
+}
+
+.welcome-content > :nth-child(5) {
+  animation-delay: 0.7s;
+}
+
+/* Comic-style "pressable" proceed button — thick outline + hard drop shadow. */
+.welcome-proceed-btn {
+  border-radius: 9999px;
+  box-shadow:
+    0 5px 0 0 #78350f,
+    0 8px 18px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.welcome-proceed-btn:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 0 0 #78350f,
+    0 14px 22px rgba(0, 0, 0, 0.4);
+}
+
+.welcome-proceed-btn:active {
+  transform: translateY(3px);
+  box-shadow:
+    0 1px 0 0 #78350f,
+    0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* The sail bobs side to side like it's catching the wind. */
+@keyframes welcome-sail-sway {
+  0%,
+  100% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+.welcome-proceed-icon {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: welcome-sail-sway 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-overlay {
+    transition: opacity 0.3s ease;
+  }
+
+  .welcome-bg img,
+  .welcome-sparkle,
+  .welcome-route-path,
+  .welcome-route-x,
+  .welcome-proceed-icon,
+  .animate-spin-slow {
+    animation: none;
+  }
+
+  .welcome-rise {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+}

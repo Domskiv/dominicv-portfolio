@@ -1,25 +1,44 @@
 <section id="home" class="flex min-h-screen flex-col border-b border-black pt-14 dark:border-white">
 
   <!-- Content area -->
-  <div class="flex flex-1">
+  <div class="relative flex flex-1">
+
+    <!-- Mobile background image (hidden on lg+) -->
+    <div class="mobile-image-bg pointer-events-none absolute inset-0 lg:hidden">
+      <img
+        src="profile.jpg"
+        alt=""
+        aria-hidden="true"
+        class="h-full w-full object-cover object-[center_15%]"
+        style="filter: grayscale(100%) contrast(1.05)"
+      >
+      <div class="mobile-vignette absolute inset-0"></div>
+    </div>
 
     <!-- Left: text (bottom-anchored — cinematic lower-third composition) -->
-    <div class="flex flex-1 flex-col justify-end px-6 pb-20 sm:px-12 lg:px-20">
+    <div class="relative z-10 flex flex-1 flex-col justify-end px-6 pb-20 sm:px-12 lg:px-20">
       <div appReveal class="space-y-4">
 
-        <p class="text-xs font-medium uppercase tracking-widest text-black/30 dark:text-white/30">
-          Full-Stack Software Engineer
+        <p class="text-xs font-medium uppercase tracking-widest text-black/60 dark:text-white/60 lg:text-black/30 lg:dark:text-white/30">
+          {{ displayRole() }}
         </p>
 
         <h1 class="text-6xl font-light leading-[0.9] tracking-tight text-black sm:text-8xl lg:text-9xl dark:text-white">
           {{ displayName() }}
         </h1>
 
-        <p class="max-w-xs pt-2 text-xs font-normal leading-relaxed text-black/40 dark:text-white/40">
-          Angular · Laravel · PostgreSQL · Pampanga, PH
+        <p class="max-w-xs pt-2 text-xs font-normal leading-relaxed text-black/60 dark:text-white/60 lg:text-black/40 lg:dark:text-white/40">
+          Pampanga, PH · +63 952 470 5905
         </p>
 
+        <div class="daily-quote pt-4" [class.quote-hidden]="!quoteVisible()">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="quote-text">{{ currentQuote().text }}</p>
+          <p class="quote-author">— {{ currentQuote().author }}</p>
+        </div>
+
       </div>
+
     </div>
 
     <!-- Right: profile image (desktop only) -->
@@ -40,8 +59,10 @@
     <div class="grid grid-cols-1 divide-y divide-black sm:grid-cols-[1fr_auto] sm:divide-x sm:divide-y-0 dark:divide-white">
 
       <div class="flex flex-wrap items-center gap-6 px-6 py-5 sm:px-12 lg:px-20">
-        <span class="text-xs font-medium text-black/30 dark:text-white/30">● Available for work</span>
-        <span class="hidden text-xs text-black/20 sm:block dark:text-white/20">Building component-driven UIs and the APIs that power them.</span>
+        <span class="flex items-center gap-2 text-xs font-medium text-black/30 dark:text-white/30">
+          <span class="status-dot"></span>Available for work
+        </span>
+        <span class="hidden text-xs text-black/20 sm:block dark:text-white/20">Open to full-time roles — bring me in, I'll ship.</span>
       </div>
 
       <div class="flex items-center gap-6 px-6 py-5 sm:px-12 lg:px-20">

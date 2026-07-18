@@ -7,10 +7,11 @@ import { Skills } from './components/skills/skills';
 import { Education } from './components/education/education';
 import { Contact } from './components/contact/contact';
 import { Cursor } from './shared/cursor/cursor';
+import { FallingLeaves } from './shared/falling-leaves';
 
 @Component({
   selector: 'app-root',
-  imports: [Navbar, Hero, Projects, Experience, Skills, Education, Contact, Cursor],
+  imports: [Navbar, Hero, Projects, Experience, Skills, Education, Contact, Cursor, FallingLeaves],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

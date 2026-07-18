@@ -20,10 +20,10 @@ export class Navbar {
   protected readonly scrolled = signal(false);
 
   protected readonly links: NavLink[] = [
-    { label: 'Work', href: '#work', section: 'work' },
+    { label: 'Work',       href: '#work',       section: 'work' },
     { label: 'Experience', href: '#experience', section: 'experience' },
-    { label: 'Skills', href: '#skills', section: 'skills' },
-    { label: 'Contact', href: '#contact', section: 'contact' },
+    { label: 'Skills',     href: '#skills',     section: 'skills' },
+    { label: 'Contact',    href: '#contact',    section: 'contact' },
   ];
 
   constructor() {
@@ -32,9 +32,7 @@ export class Navbar {
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            this.activeSection.set(entry.target.id);
-          }
+          if (entry.isIntersecting) this.activeSection.set(entry.target.id);
         }
       },
       { rootMargin: '-40% 0px -55% 0px' }
@@ -46,31 +44,16 @@ export class Navbar {
     window.addEventListener('scroll', onScroll, { passive: true });
     destroyRef.onDestroy(() => window.removeEventListener('scroll', onScroll));
 
-    const observe = () => {
-      sections.forEach((id) => {
-        const el = document.getElementById(id);
-        if (el) observer.observe(el);
-      });
-    };
+    const observe = () => sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
 
-    if (document.readyState === 'complete') {
-      observe();
-    } else {
-      window.addEventListener('load', observe, { once: true });
-    }
-
+    document.readyState === 'complete' ? observe() : window.addEventListener('load', observe, { once: true });
     destroyRef.onDestroy(() => observer.disconnect());
   }
 
-  toggleMenu(): void {
-    this.menuOpen.set(!this.menuOpen());
-  }
-
-  closeMenu(): void {
-    this.menuOpen.set(false);
-  }
-
-  toggleTheme(): void {
-    this.theme.toggle();
-  }
+  toggleMenu(): void  { this.menuOpen.set(!this.menuOpen()); }
+  closeMenu(): void   { this.menuOpen.set(false); }
+  toggleTheme(): void { this.theme.toggle(); }
 }

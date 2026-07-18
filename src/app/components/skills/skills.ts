@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, signal } from '@angular/core';
 import { RevealDirective } from '../../shared/reveal.directive';
 
 interface TechSkill {
@@ -12,7 +12,12 @@ interface TechSkill {
   templateUrl: './skills.html',
   styleUrl: './skills.css',
 })
-export class Skills {
+export class Skills implements AfterViewInit, OnDestroy {
+  private readonly el = inject(ElementRef);
+  protected readonly litCount = signal(0);
+  private observer: IntersectionObserver | null = null;
+  private litInterval: ReturnType<typeof setInterval> | null = null;
+
   protected readonly techSkills: TechSkill[] = [
     { name: 'Angular',          icon: 'angular' },
     { name: 'TypeScript',       icon: 'typescript' },
@@ -46,6 +51,30 @@ export class Skills {
     'Code Reviews',
     'Application Deployment',
   ];
+
+  ngAfterViewInit(): void {
+    this.observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      this.observer?.disconnect();
+      this.observer = null;
+      let count = 0;
+      this.litInterval = setInterval(() => {
+        count++;
+        this.litCount.set(count);
+        if (count >= this.techSkills.length) {
+          clearInterval(this.litInterval!);
+          this.litInterval = null;
+        }
+      }, 200);
+    }, { threshold: 0.2 });
+
+    this.observer.observe(this.el.nativeElement);
+  }
+
+  ngOnDestroy(): void {
+    this.observer?.disconnect();
+    if (this.litInterval) clearInterval(this.litInterval);
+  }
 
   protected iconUrl(slug: string): string {
     return `https://cdn.simpleicons.org/${slug}`;

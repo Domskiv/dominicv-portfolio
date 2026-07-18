@@ -21,7 +21,7 @@ export class Experience {
     {
       role: 'Associate Software Engineer I',
       company: 'Cloudstaff · Remote',
-      period: 'Apr 2025 – Present',
+      period: 'Apr 2025 – Jul 2026',
       highlights: [
         'Delivered features across two production applications built on Angular frontends and Lumen/Laravel backends, contributing across the full stack from UI components to API integrations.',
         'Led framework modernization efforts, including major version upgrades of Angular and Laravel/Lumen from legacy releases to current stable versions across two production applications.',

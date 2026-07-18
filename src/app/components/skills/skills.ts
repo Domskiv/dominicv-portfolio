@@ -1,50 +1,57 @@
 import { Component } from '@angular/core';
 import { RevealDirective } from '../../shared/reveal.directive';
-import { TechIcon } from '../../shared/tech-icon';
 
-interface SkillCategory {
-  title: string;
-  fruit: string;
-  skills: string[];
+interface TechSkill {
+  name: string;
+  icon: string;  // simple-icons.org slug
 }
 
 @Component({
   selector: 'app-skills',
-  imports: [RevealDirective, TechIcon],
+  imports: [RevealDirective],
   templateUrl: './skills.html',
   styleUrl: './skills.css',
 })
 export class Skills {
-  protected readonly categories: SkillCategory[] = [
-    {
-      title: 'Front End',
-      fruit: 'Gomu Gomu no Mi — flexible, ever-adapting interfaces',
-      skills: ['Angular', 'WordPress', 'HTML5', 'CSS3', 'Responsive Design', 'Component-Based Architecture'],
-    },
-    {
-      title: 'Back End',
-      fruit: 'Mera Mera no Mi — powering the engine room',
-      skills: ['PHP (Laravel)', 'PHP (Lumen)', 'RESTful API Design & Development'],
-    },
-    {
-      title: 'Databases',
-      fruit: 'Hie Hie no Mi — keeping data perfectly structured',
-      skills: ['SQL', 'PostgreSQL', 'Database Design', 'Query Optimization'],
-    },
-    {
-      title: 'Cloud & DevOps',
-      fruit: 'Goro Goro no Mi — lightning-fast deployments',
-      skills: ['AWS', 'Linux', 'Bash Scripting', 'Application Deployment'],
-    },
-    {
-      title: 'AI & Automation',
-      fruit: 'Toki Toki no Mi — bending time with automation',
-      skills: ['GitHub Copilot', 'n8n Workflows', 'Claude', 'GPT', 'Gemini', 'AI-Augmented Development'],
-    },
-    {
-      title: 'Tools & Methods',
-      fruit: 'Bara Bara no Mi — splitting work into manageable pieces',
-      skills: ['Git', 'GitHub', 'Postman', 'Jira', 'Agile/Scrum', 'Unit Testing', 'Peer Code Reviews'],
-    },
+  protected readonly techSkills: TechSkill[] = [
+    { name: 'Angular',          icon: 'angular' },
+    { name: 'TypeScript',       icon: 'typescript' },
+    { name: 'Laravel',          icon: 'laravel' },
+    { name: 'Lumen',            icon: 'php' },
+    { name: 'WordPress',        icon: 'wordpress' },
+    { name: 'HTML5',            icon: 'html5' },
+    { name: 'CSS3',             icon: 'css3' },
+    { name: 'PostgreSQL',       icon: 'postgresql' },
+    { name: 'AWS',              icon: 'amazonaws' },
+    { name: 'Linux',            icon: 'linux' },
+    { name: 'Git',              icon: 'git' },
+    { name: 'Postman',          icon: 'postman' },
+    { name: 'Jira',             icon: 'jira' },
+    { name: 'n8n',              icon: 'n8n' },
+    { name: 'GitHub Copilot',   icon: 'github' },
+    { name: 'ChatGPT',          icon: 'openai' },
+    { name: 'Claude',           icon: 'anthropic' },
+    { name: 'Gemini',           icon: 'googlegemini' },
+    { name: 'Bash',             icon: 'gnubash' },
   ];
+
+  protected readonly practiceSkills: string[] = [
+    'Responsive Design',
+    'RESTful API Design',
+    'Database Design',
+    'Query Optimization',
+    'SQL',
+    'Agile / Scrum',
+    'Unit Testing',
+    'Code Reviews',
+    'Application Deployment',
+  ];
+
+  protected iconUrl(slug: string): string {
+    return `https://cdn.simpleicons.org/${slug}`;
+  }
+
+  protected onIconError(event: Event): void {
+    (event.target as HTMLImageElement).style.display = 'none';
+  }
 }

@@ -1,0 +1,34 @@
+:host {
+  display: block;
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+}
+
+@media (hover: none) {
+  :host { display: none; }
+}
+
+.cursor-d {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1;
+  color: #000;
+  will-change: transform;
+  user-select: none;
+  /* Font-weight transition only — transform is set inline by JS so stays instant */
+  transition: font-weight 0.15s ease;
+}
+
+.cursor-d.is-hover {
+  font-weight: 700;
+}
+
+:host-context(.dark) .cursor-d {
+  color: #fff;
+}

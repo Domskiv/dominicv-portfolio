@@ -1,0 +1,13 @@
+:host {
+  display: block;
+}
+
+/* Force all brand icons to black (light mode) */
+.skill-icon {
+  filter: brightness(0);
+}
+
+/* Force all brand icons to white (dark mode) */
+:host-context(.dark) .skill-icon {
+  filter: brightness(0) invert(1);
+}

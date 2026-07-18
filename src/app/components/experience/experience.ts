@@ -1,16 +1,5 @@
-import {
-  AfterViewInit,
-  Component,
-  DestroyRef,
-  ElementRef,
-  QueryList,
-  ViewChild,
-  ViewChildren,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
 import { RevealDirective } from '../../shared/reveal.directive';
-import { GoingMerry } from '../../shared/going-merry';
 
 interface ExperienceItem {
   role: string;
@@ -21,11 +10,13 @@ interface ExperienceItem {
 
 @Component({
   selector: 'app-experience',
-  imports: [RevealDirective, GoingMerry],
+  imports: [RevealDirective],
   templateUrl: './experience.html',
   styleUrl: './experience.css',
 })
-export class Experience implements AfterViewInit {
+export class Experience {
+  protected readonly selectedJob = signal<ExperienceItem | null>(null);
+
   protected readonly experience: ExperienceItem[] = [
     {
       role: 'Associate Software Engineer I',
@@ -68,85 +59,18 @@ export class Experience implements AfterViewInit {
     },
   ];
 
-  @ViewChild('track') protected trackRef?: ElementRef<HTMLElement>;
-  @ViewChildren('islandMarker') protected markerRefs?: QueryList<ElementRef<HTMLElement>>;
-
-  /** 0..1 position of the Going Merry along the voyage track. */
-  protected readonly shipProgress = signal(0);
-
-  /** One entry per island marker (including the final one), true once the ship has reached it. */
-  protected readonly arrived = signal<boolean[]>(Array(this.experience.length + 1).fill(false));
-
-  private markerOffsets: number[] = [];
-  private trackTop = 0;
-  private trackHeight = 0;
-  private ticking = false;
-
-  constructor() {
-    const destroyRef = inject(DestroyRef);
-    const onScroll = () => this.requestUpdate();
-    const onResize = () => {
-      this.measure();
-      this.requestUpdate();
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onResize);
-
-    destroyRef.onDestroy(() => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onResize);
-    });
+  protected openJob(job: ExperienceItem): void {
+    this.selectedJob.set(job);
+    document.body.style.overflow = 'hidden';
   }
 
-  ngAfterViewInit(): void {
-    this.measure();
-    this.requestUpdate();
+  protected closeJob(): void {
+    this.selectedJob.set(null);
+    document.body.style.overflow = '';
   }
 
-  private measure(): void {
-    const track = this.trackRef?.nativeElement;
-    if (!track || !this.markerRefs) {
-      return;
-    }
-
-    const trackRect = track.getBoundingClientRect();
-    this.trackTop = trackRect.top + window.scrollY;
-    this.trackHeight = trackRect.height;
-
-    this.markerOffsets = this.markerRefs.map((ref) => {
-      if (this.trackHeight <= 0) {
-        return 0;
-      }
-      const top = ref.nativeElement.getBoundingClientRect().top + window.scrollY;
-      return Math.min(1, Math.max(0, (top - this.trackTop) / this.trackHeight));
-    });
-  }
-
-  private requestUpdate(): void {
-    if (this.ticking || this.trackHeight <= 0) {
-      return;
-    }
-    this.ticking = true;
-    requestAnimationFrame(() => {
-      const raw = (window.scrollY + window.innerHeight * 0.5 - this.trackTop) / this.trackHeight;
-      const progress = Math.min(1, Math.max(0, raw));
-      this.shipProgress.set(progress);
-
-      const current = this.arrived();
-      const next = [...current];
-      let changed = false;
-      this.markerOffsets.forEach((offset, i) => {
-        if (!next[i] && progress >= offset - 0.02) {
-          next[i] = true;
-          changed = true;
-        }
-      });
-      if (changed) {
-        this.arrived.set(next);
-      }
-
-      this.ticking = false;
-    });
+  @HostListener('document:keydown.escape')
+  protected onEscape(): void {
+    if (this.selectedJob()) this.closeJob();
   }
 }
